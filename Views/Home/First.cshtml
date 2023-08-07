@@ -1,0 +1,43 @@
+﻿﻿
+@{
+    ViewData["Title"] = "First";
+}
+
+<h1>First</h1>
+<button id="button1" class="btn btn-primary">Click</button>
+<div class="alert alert-info" id="div1"></div>
+
+@section Styles{
+
+}
+
+@section Scripts{
+    <script>
+        
+        const btn = document.querySelector('#button1');
+        const myDiv = document.querySelector('#div1');
+        //步驟一
+        const xhr=new XMLHttpRequest();
+
+        btn.addEventListener('click', () => {
+            //myDiv.innerHTML = "Button Click"  這是練習一不用管
+
+            //步驟二對伺服器發出要求(Request)
+            xhr.open('Get', '/api/Index');
+            xhr.send();
+
+            //步驟三接收伺服器回傳的資料
+            xhr.addEventListener('load',()=>{
+                const data=xhr.responseText ;
+                //步驟四讀資料 JSON XML
+                //步驟五顯示資料
+                myDiv.innerHTML = `<h3>${data}</h3>`
+            })
+            
+
+
+
+
+        })
+    </script>
+}
