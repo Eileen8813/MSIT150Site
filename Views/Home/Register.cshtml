@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+       @*   <form action="~/api/getdemo" method="post">*@
+         <form id="form1">
+    <div class="mb-3">
+      
+    </div>
+    <div class="mb-3">
+                <label for="textname" class="form-label">姓名</label>
+                <input type="text" class="form-control" id="textname" name="name">
+    </div>
+    <div class="mb-3">
+       
+    </div>
+            <div class="mb-3">
+                <label for="textEmail" class="form-label">Email</label>
+                <input type="text" class="form-control" id="textEmail" name="Email">
+            </div>
+
+
+    <div class="mb-3">
+                <label for="textold" class="form-label">年齡</label>
+                <input type="text" class="form-control" id="textold" name="Age">
+    </div>
+
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" name="file">
+            </div>
+
+    <button type="submit" id="button1">送出</button>
+            
+   
+
+</form>
+        <div class="alert alert-info" id="div1"></div>
+    </div>
+</div>
+@section Styles{
+    <style>
+    </style>
+
+}
+@section Scripts{
+    <script>
+        const btn1 = document.querySelector('#button1');
+        const thediv = document.querySelector('#div1');
+        //const textname = document.querySelector('#textname');
+        //const textold = document.querySelector('#textold');
+
+      btn1.addEventListener('click',event=>{
+          event.preventDefault();
+         
+          const xhr = new XMLHttpRequest();
+
+            xhr.open('Post', '/api/Register');
+            //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+            //xhr.send(`name=${textname.value}&old=${textold.value}`);
+            const formdata = new FormData(document.querySelector('#form1'));
+            xhr.send(formdata);
+
+
+            xhr.addEventListener('load', () => {
+                const data = xhr.responseText;
+
+                thediv.innerHTML = data;
+
+            })
+
+
+      })
+        
+
+     
+
+
+
+
+    </script>
+}

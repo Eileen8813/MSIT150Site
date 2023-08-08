@@ -22,6 +22,17 @@ namespace MSIT150Site.Controllers
 
             return View();
         }
+        public IActionResult GetDemo()
+        {
+
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+
+            return View();
+        }
 
         public IActionResult Privacy()
         {

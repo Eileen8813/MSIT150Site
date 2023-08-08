@@ -23,7 +23,7 @@
 
         //步驟一
         const xhr = new XMLHttpRequest();
-
+        xhr.responseType = 'json';
             //步驟二對伺服器發出要求(Request)
             xhr.open('Get', '/datas/travel.js');
             xhr.send();
@@ -32,12 +32,20 @@
 
        
             xhr.addEventListener('load', () => {
-                const data = xhr.responseText;
-            //console.log(data);
-            const d = data.split('"Section": ');
-            console.log(d[1]);
+            
+                const data = xhr.response;
+           
+           console.log(typeof(data));
+            const da = JSON.stringify(data);
+
+            console.log(da);
+           // const d = data.split('"Section": ');
+            //console.log(d[1]);
                 //步驟四讀資料 JSON XML
-            const jsonData = JSON.parse(d[1]);
+            
+            //console.log(da);
+
+            const jsonData = JSON.parse(data);
             const dataspots=jsonData.spots;
 
             const card = dataspots.map((dataspot)=> {
