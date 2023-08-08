@@ -24,21 +24,20 @@
         //步驟一
         const xhr = new XMLHttpRequest();
 
-       
-            //myDiv.innerHTML = "Button Click"  這是練習一不用管
-
             //步驟二對伺服器發出要求(Request)
             xhr.open('Get', '/datas/travel.js');
             xhr.send();
-
+       
             //步驟三接收伺服器回傳的資料
 
-            //這邊的Load不能改寫成簡短的!!因為xhr(XMLHttpRequest)是沒有load這個方法!
+       
             xhr.addEventListener('load', () => {
                 const data = xhr.responseText;
-            console.log(data.spots['CommonFormat']);
+            //console.log(data);
+            const d = data.split('"Section": ');
+            console.log(d[1]);
                 //步驟四讀資料 JSON XML
-            const jsonData = JSON.parse(data);
+            const jsonData = JSON.parse(d[1]);
             const dataspots=jsonData.spots;
 
             const card = dataspots.map((dataspot)=> {

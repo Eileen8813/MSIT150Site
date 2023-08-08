@@ -19,6 +19,21 @@
         //步驟一
         const xhr=new XMLHttpRequest();
 
+        xhr.addEventListener('loadstart', () => {
+            myDiv.setAttribute('disabled', 'disabled');
+            btn.textContent="執行中...";
+
+
+
+        })
+        xhr.addEventListener('loadend', () => {
+            myDiv.removeAttribute('disabled', 'disabled');
+            btn.textContent = "click";
+
+
+        })
+
+
         btn.addEventListener('click', () => {
             //myDiv.innerHTML = "Button Click"  這是練習一不用管
 
@@ -33,6 +48,8 @@
                 //步驟五顯示資料
                 myDiv.innerHTML = `<h3>${data}</h3>`
             })
+
+
             
 
 
