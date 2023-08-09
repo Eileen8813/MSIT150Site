@@ -4,69 +4,42 @@
 }
 
 <h1>作業二</h1>
-
-<div class="card" style="width: 18rem;">
-   @* <img src="..." class="card-img-top" alt="...">*@
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
+<div >
+    <div class="card" style="width: 18rem;">
+        <div class="card-body" id="div1">
+        </div> 
+        </div>
 </div>
+
 @section Styles{
 
 }
 
 @section Scripts{
+    <script src="~/datas/travel.js"></script>
     <script>
         //作業二 引用 datas/Travel.js 中的JSON，讀取資料後，透過 bootstrap cards component 顯示在網頁上
-
-        //步驟一
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = 'json';
-            //步驟二對伺服器發出要求(Request)
-            xhr.open('Get', '/datas/travel.js');
-            xhr.send();
+        const thediv=document.querySelector('#div1');
        
-            //步驟三接收伺服器回傳的資料
+        
+                const spot=spots.CommonFormat.Section;
 
-       
-            xhr.addEventListener('load', () => {
-            
-                const data = xhr.response;
-           
-           console.log(typeof(data));
-            const da = JSON.stringify(data);
-
-            console.log(da);
-           // const d = data.split('"Section": ');
-            //console.log(d[1]);
-                //步驟四讀資料 JSON XML
-            
-            //console.log(da);
-
-            const jsonData = JSON.parse(data);
-            const dataspots=jsonData.spots;
-
-            const card = dataspots.map((dataspot)=> {
-            const { RowNumber, REF_WP, CAT1, CAT2, SERIAL_NO, MEMO_TIME, stitle, xbody, avBegin, avEnd, idpt, address,
-                xpostDate, img, langinfo, POI, info, longitude, latitude, MRT } = spot;
+        
+        const data = spot.map(s=> 
+            {   const img=(s.file.img.length==0||s.file.img.length==undefined)?s.file.img.text:s.file.img[0].text;
+              const xbody=(s.xbody==""||s.xbody==0||s.xbody==undefined)?null:s.xbody.substring(0,50)
+                const xurl=(s.xurl==""||s.xurl==0||s.xurl==undefined)?`<p class="btn btn-primary ">目前沒有官網<p>`:`<a href="${s.xurl}" class="btn btn-primary ">看官網</a>`;
+   
                 return (
-                    ` <tr>
-                                 <td>${stitle}</td>
-                       
-                    </tr>
-                    `)
-
-            });
-                //步驟五顯示資料
-            $('#div1').html(card.join(''));
-            })
-
-
-
-
-
+        `<img src="${img}" class="card-img-top" alt="...">
+        <h5 class="card-title">${s.stitle}</h5>
+        <p class="card-text">${xbody}</p>
+        ${xurl}
+         `)
+     });
        
+            thediv.innerHTML = data.join('');
+           
+         
     </script>
 }

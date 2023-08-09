@@ -18,7 +18,8 @@
 
         //步驟二對伺服器發出要求
        // xhr.open('GET','/api/index',false);  //false 表示改成同步的執行模式
-        xhr.open('GET', '/api/GetDemo');
+        //xhr.open('GET', '/api/GetDemo');
+        xhr.open('GET', `@Url.Content("/api/getdemo")?name=${name}&age=${age}`)
         xhr.send();
 
         //步驟三接收伺服器回傳的結果

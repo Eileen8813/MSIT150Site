@@ -23,7 +23,8 @@
             //myDiv.innerHTML = "Button Click"  這是練習一不用管
 
             //步驟二對伺服器發出要求(Request)
-            xhr.open('Get', '/api/Index');
+           // xhr.open('Get', '/api/Index');
+            xhr.open('Get', '@Url.Content("/api/Index")');
             xhr.send();
 
             //步驟三接收伺服器回傳的資料
