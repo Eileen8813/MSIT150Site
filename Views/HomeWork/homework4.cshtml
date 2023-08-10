@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "homework4";
+}
+
+<h1>homework4</h1>
+
+<select id="selectCity"></select>
+
+<span class="bg-primary  text-white display-3" id="span1"></span>
+
+
+@section Styles{
+    <style>
+
+    </style>
+}
+
+@section Scripts{
+
+    <script>
+        //作業四 const cities = ["台北市","新北市","桃園市","台中市", "台南市","高雄市"]
+        //將cities城市資料放進select標籤中
+        //使用者選取了某個城市後，將選到的城市顯示在span標籤中
+        const cities = ["台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市"]
+        const selCity = document.querySelector('#selectCity');
+       
+
+        const theDiv = document.querySelector('#div1');
+        const thespan = document.querySelector('#span1');
+
+
+       
+        function loadCity() {
+            const datas = cities.map(city => `<option value='${city}'>${city}</option>`)
+            selCity.innerHTML = datas.join("");
+        }
+
+        selCity.addEventListener('change', () => {
+            thespan.textContent = `${selCity.value}`
+        })
+
+       
+
+        loadCity();
+
+
+
+    </script>
+}

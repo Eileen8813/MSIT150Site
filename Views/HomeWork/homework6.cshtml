@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewData["Title"] = "homework6";
+}
+
+<h1>homework6</h1>
+
+<select id="selectCity"></select>
+<select id="selectDistricts"></select>
+<select id="selectRoad"></select>
+
+<div id="div1" class="alert alert-info"> </div>
+
+@section Styles{
+    <style>
+
+    </style>
+}
+
+@section Scripts{
+
+    <script>
+        const selCity = document.querySelector('#selectCity');
+        const selDistricts = document.querySelector('#selectDistricts');
+        const selRoad = document.querySelector('#selectRoad');
+
+        const theDiv = document.querySelector('#div1');
+
+
+        function loadCity() {
+        
+
+
+                //FETCH
+                fetch('@Url.Content("/api/Cities")').then(response=>{
+                    return response.json();
+                console.log(response.json());
+
+                })
+                .then(data => { 
+                    const cities= data.map(city => `<option value='${city}'>${city}</option>`);
+                    selCity.innerHTML=cities.join("");
+                    console.log(cities.join(""));
+                })
+
+            }
+        
+
+
+        loadCity();
+
+
+        //function loadDistricts() {
+        //    const xhr = new XMLHttpRequest();
+        //    xhr.open('Get', `@Url.Content("/api/Districts")?city=${selCity.value}`);
+        //    xhr.send();
+
+        //    xhr.addEventListener('load', () => {
+        //        const datas = JSON.parse(xhr.responseText);
+
+        //        const districts = datas.map(district => `<option value=${district} >${district} </option>`)
+
+        //        selDistricts.innerHTML = districts.join("");
+        //        Roads();
+
+
+        //    })
+        //}
+
+
+        //function Roads() {
+        //    const xhr = new XMLHttpRequest();
+        //    xhr.open('Get', `@Url.Content("/api/Roads")?districts=${selDistricts.value}`);
+        //    xhr.send();
+
+        //    xhr.addEventListener('load', () => {
+        //        const datas = JSON.parse(xhr.responseText);
+
+        //        const roads = datas.map(road => `<option value=${road} >${road} </option>`)
+
+        //        selRoad.innerHTML = roads.join("");
+
+
+
+        //    })
+        //}
+
+
+
+        //loadCity();
+        //selCity.addEventListener('change', () => {
+        //    theDiv.textContent = selCity.value;
+        //    loadDistricts();
+        //})
+
+        //selDistricts.addEventListener('change', () => {
+        //    theDiv.textContent += selDistricts.value;
+        //    Roads();
+
+        //})
+
+
+        //        functuon selectcity(){
+        //    new Promise((resolve, reject) => {
+        //        setTimeout(() => {
+
+
+
+        //        }, 500)
+        //    })
+
+        //}
+
+
+
+    </script>
+}

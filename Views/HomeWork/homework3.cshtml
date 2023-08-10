@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "homework3";
+}
+
+<h1>homework3</h1>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        @*   <form action="~/api/getdemo" method="post">*@
+        <form id="form1">
+            <div class="mb-3">
+            </div>
+            <div class="mb-3">
+                <label for="textname" class="form-label">姓名</label>
+                <input type="text" class="form-control" id="textname" name="name">
+            </div>
+            <div class="mb-3">
+            </div>
+            <div class="mb-3">
+                <label for="textEmail" class="form-label">Email</label>
+                <input type="text" class="form-control" id="textEmail" name="Email">
+            </div>
+
+            <button type="submit" id="button1">送出</button>
+
+
+
+        </form>
+        <div class="alert alert-info" id="div1"></div>
+    </div>
+</div>
+@section Styles{
+    <style>
+    </style>
+
+}
+@section Scripts{
+    <script>
+        const btn1 = document.querySelector('#button1');
+        const thediv = document.querySelector('#div1');
+        const labname = document.querySelector('#textname');
+
+        btn1.addEventListener('click', event => {
+            event.preventDefault();
+
+          
+                })
+            })
+
+        labname.addEventListener('blur', name => {
+            console.log(name);
+            const path = `/api/Check?name=${name}`;
+            fetch('@Url.Content("path")', {
+                body: fetchdata, method: 'Post'
+            }
+            )
+                .then(response => {
+
+                    thediv.innerHTML(response);
+                }
+                )
+
+            console.log(thediv.innerHTML(response));
+
+            console.log(response);
+
+
+
+
+    </script>
+}

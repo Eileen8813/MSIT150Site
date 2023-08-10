@@ -116,5 +116,16 @@ namespace MSIT150Site.Controllers
 
         }
 
+        //作業3
+        public IActionResult Check(string name)
+        {
+            var checkname = _dbContext.Members.FirstOrDefault( x=> x.Name == name);
+
+            if (checkname == null)
+            { return Content("沒有註冊過喔"); }
+            else
+            { return Content("有註冊了"); }
+        }
+
     }
 }
