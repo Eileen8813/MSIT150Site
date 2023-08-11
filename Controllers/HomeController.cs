@@ -51,7 +51,24 @@ namespace MSIT150Site.Controllers
             return View();
         }
 
+        public IActionResult jQuery()
+        {
+            return View();
+        }
 
+        public IActionResult History()
+        {
+            return View();
+        }
+        public IActionResult partial1()
+        {
+            return PartialView();
+        }
+        public IActionResult partial2()
+        {
+            ViewBag.Message="這是一個partial  2";
+            return PartialView();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

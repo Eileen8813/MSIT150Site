@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewData["Title"] = "jQuery";
+}
+
+<h1>jQuery</h1>
+<button id="buttonGet" class="btn btn-primary">get</button>
+<button id="buttonPost" class="btn btn-secondary">post</button>
+<button id="buttonJson" class="btn btn-success">getJson</button>
+<button id="buttonLoad" class="btn btn-info">load</button>
+<button id="buttonAjax" class="btn btn-warning">ajax</button>
+<button id="buttonCors" class="btn btn-danger">cors</button>
+<div class="alert alert-dark mt-3 w-50" role="alert" id="divAlert">
+
+</div>
+
+<div class="alert alert-dark mt-3 w-50" role="alert" id="div2">
+    <ul ></ul>
+</div>
+@section Scripts{
+    <script>
+        $('#buttonGet').click(function () {
+            $.get('@Url.Content("/api/GetDemo")', { "name": "Tom", "old": 35 }, function (data) { $('#divAlert').text(data
+            ) })
+        })
+        $('#buttonPost').click(function () {
+            $.post('@Url.Content("/api/GetDemo")', { "name": "AAA", "old": 30 }, function (data) {
+                $('#divAlert').text(data
+                )
+            })
+        })
+
+
+        $('#buttonJson').click(function () {
+
+            $.getJSON('@Url.Content("~/api/Cities")', function (data) {
+                //console.log(data);
+                $('#divAlert').text(data);
+                const theui = $('#div2>ul');
+                const frag = $(document.createDocumentFragment());//建一個空的容器
+
+                $.each(data, function (idx, city) {
+                    //console.log(city);
+                    const item = $('<li></li>').text(city)
+
+                    frag.append(item)
+                })
+                //console.log(frag);
+                theui.html(frag);
+
+            })
+        })
+        $('#buttonLoad').click(function () {
+            $('#divAlert').load('@Url.Content("~/Home/partial2")')
+        })
+
+
+
+        $('#buttonAjax').click(function () {
+
+            $.ajax({
+                'url': '@Url.Content("~/api/GetDemo")',
+                'type': 'get',
+                'data': { "name": "Lina", "old": 25 },
+
+                'success': function (data) { $('#divAlert').text(data) }
+                        
+            })
+
+
+
+            $.ajax({
+                'url': '@Url.Content("~/api/Cities")',
+                'type':'get',
+                'dataType':'json'
+            
+            
+            })
+            .done(function(data){
+                  
+                const theui = $('#div2>ul');
+                    const frag = $(document.createDocumentFragment());
+
+                    $.each(data, function (idx, city) {
+                        
+                        const item = $('<li></li>').text(city)
+
+                        frag.append(item)
+                    })
+                   
+                    theui.html(frag);
+
+
+
+            })
+
+
+
+            
+        })
+        $('#buttonCors').click(function () {
+            $.getJSON('https://localhost:7117/api/Shippers', function (data) {
+                console.log(data[0]);
+                $('#divAlert').text(data);
+                const theui = $('#div2>ul');
+                const frag = $(document.createDocumentFragment());//建一個空的容器
+
+                $.each(data, function (idx, city) {
+                    console.log(city);
+                    const item =city
+
+                    frag.append(item)
+                })
+                //console.log(frag);
+                theui.html(frag);
+
+            })
+
+        })
+
+    </script>
+}
